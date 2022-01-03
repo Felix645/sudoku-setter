@@ -184,7 +184,7 @@ let placeNumber = function(grid, number, total_tries, retries = 0) {
     let tries = 0;
     let amount_placed = 0;
 
-    while(amount_placed < 9 && tries < 100000) {
+    while(amount_placed < 9 && tries < 2000) {
         total_tries++;
         tries++;
 
@@ -218,7 +218,20 @@ let placeNumber = function(grid, number, total_tries, retries = 0) {
         if( retries < 30 ) {
             result = placeNumber(grid, number, total_tries, retries + 1);
         } else {
-            result = placeNumber(grid, number - 1, total_tries, 0);
+            let remove;
+
+            if( number - 1 >= 1 ) {
+                remove = 1;
+                grid = grid = eraseNumber(number - 1, grid);
+            }
+
+            if( number - 2 >= 1 ) {
+                remove = 2;
+                grid = grid = eraseNumber(number - 1, grid);
+                grid = grid = eraseNumber(number - 2, grid);
+            }
+
+            result = placeNumber(grid, number - remove, total_tries, 0);
         }
 
         grid = result.grid;
@@ -324,7 +337,7 @@ let generateNewPuzzle = function(numberOfPuzzles) {
 //
 // console.log(grid);
 
-result = generateNewPuzzle(1);
+result = generateNewPuzzle(2000);
 
 console.log(result);
 

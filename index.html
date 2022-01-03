@@ -5,9 +5,147 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./app.js" type="text/javascript"></script>
+
+    <style>
+        .grid {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        .cell {
+            height: 40px;
+            width: 40px;
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cell.box-top {
+            border-top: 4px solid black;
+        }
+
+        .cell.box-left {
+            border-left: 4px solid black;
+        }
+
+        .cell.box-bottom {
+            border-bottom: 4px solid black;
+        }
+
+        .cell.box-right {
+            border-right: 4px solid black;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="grid">
+        <div class="row" data-row="0">
+            <div class="cell box-top box-left" data-col="0"></div>
+            <div class="cell box-top" data-col="1"></div>
+            <div class="cell box-top" data-col="2"></div>
+            <div class="cell box-top box-left" data-col="3"></div>
+            <div class="cell box-top" data-col="4"></div>
+            <div class="cell box-top" data-col="5"></div>
+            <div class="cell box-top box-left" data-col="6"></div>
+            <div class="cell box-top" data-col="7"></div>
+            <div class="cell box-top box-right" data-col="8"></div>
+        </div>
+        <div class="row" data-row="1">
+            <div class="cell box-left" data-col="0"></div>
+            <div class="cell" data-col="1"></div>
+            <div class="cell" data-col="2"></div>
+            <div class="cell box-left" data-col="3"></div>
+            <div class="cell" data-col="4"></div>
+            <div class="cell" data-col="5"></div>
+            <div class="cell box-left" data-col="6"></div>
+            <div class="cell" data-col="7"></div>
+            <div class="cell box-right" data-col="8"></div>
+        </div>
+        <div class="row" data-row="2">
+            <div class="cell box-left" data-col="0"></div>
+            <div class="cell" data-col="1"></div>
+            <div class="cell" data-col="2"></div>
+            <div class="cell box-left" data-col="3"></div>
+            <div class="cell" data-col="4"></div>
+            <div class="cell" data-col="5"></div>
+            <div class="cell box-left" data-col="6"></div>
+            <div class="cell" data-col="7"></div>
+            <div class="cell box-right" data-col="8"></div>
+        </div>
+        <div class="row" data-row="3">
+            <div class="cell box-top box-left" data-col="0"></div>
+            <div class="cell box-top" data-col="1"></div>
+            <div class="cell box-top" data-col="2"></div>
+            <div class="cell box-top box-left" data-col="3"></div>
+            <div class="cell box-top" data-col="4"></div>
+            <div class="cell box-top" data-col="5"></div>
+            <div class="cell box-top box-left" data-col="6"></div>
+            <div class="cell box-top" data-col="7"></div>
+            <div class="cell box-top box-right" data-col="8"></div>
+        </div>
+        <div class="row" data-row="4">
+            <div class="cell box-left" data-col="0"></div>
+            <div class="cell" data-col="1"></div>
+            <div class="cell" data-col="2"></div>
+            <div class="cell box-left" data-col="3"></div>
+            <div class="cell" data-col="4"></div>
+            <div class="cell" data-col="5"></div>
+            <div class="cell box-left" data-col="6"></div>
+            <div class="cell" data-col="7"></div>
+            <div class="cell box-right" data-col="8"></div>
+        </div>
+        <div class="row" data-row="5">
+            <div class="cell box-left" data-col="0"></div>
+            <div class="cell" data-col="1"></div>
+            <div class="cell" data-col="2"></div>
+            <div class="cell box-left" data-col="3"></div>
+            <div class="cell" data-col="4"></div>
+            <div class="cell" data-col="5"></div>
+            <div class="cell box-left" data-col="6"></div>
+            <div class="cell" data-col="7"></div>
+            <div class="cell box-right" data-col="8"></div>
+        </div>
+        <div class="row" data-row="6">
+            <div class="cell box-top box-left" data-col="0"></div>
+            <div class="cell box-top" data-col="1"></div>
+            <div class="cell box-top" data-col="2"></div>
+            <div class="cell box-top box-left" data-col="3"></div>
+            <div class="cell box-top" data-col="4"></div>
+            <div class="cell box-top" data-col="5"></div>
+            <div class="cell box-top box-left" data-col="6"></div>
+            <div class="cell box-top" data-col="7"></div>
+            <div class="cell box-top box-right" data-col="8"></div>
+        </div>
+        <div class="row" data-row="7">
+            <div class="cell box-left" data-col="0"></div>
+            <div class="cell" data-col="1"></div>
+            <div class="cell" data-col="2"></div>
+            <div class="cell box-left" data-col="3"></div>
+            <div class="cell" data-col="4"></div>
+            <div class="cell" data-col="5"></div>
+            <div class="cell box-left" data-col="6"></div>
+            <div class="cell" data-col="7"></div>
+            <div class="cell box-right" data-col="8"></div>
+        </div>
+        <div class="row" data-row="8">
+            <div class="cell box-left box-bottom" data-col="0"></div>
+            <div class="cell box-bottom" data-col="1"></div>
+            <div class="cell box-bottom" data-col="2"></div>
+            <div class="cell box-left box-bottom" data-col="3"></div>
+            <div class="cell box-bottom" data-col="4"></div>
+            <div class="cell box-bottom" data-col="5"></div>
+            <div class="cell box-left box-bottom" data-col="6"></div>
+            <div class="cell box-bottom" data-col="7"></div>
+            <div class="cell box-bottom box-right" data-col="8"></div>
+        </div>
+    </div>
+
+
+    <script src="./app.js" type="text/javascript"></script>
 </body>
 </html>

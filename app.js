@@ -164,12 +164,12 @@ let eraseNumber = function(numberToErase, grid) {
 
 let placeNumber = function(grid, number, total_tries, retries = 0) {
 
-    console.log('------------------------------------------------------')
-    console.log('total tries: '+total_tries);
-    console.log('placing number: ' + number);
-    console.log('retries: ' + retries);
+    // console.log('------------------------------------------------------')
+    // console.log('total tries: '+total_tries);
+    // console.log('placing number: ' + number);
+    // console.log('retries: ' + retries);
 
-    if( total_tries > 300000000000 ) {
+    if( total_tries > 500000000000 ) {
         throw "Too many tries (placeNumber): "+total_tries;
     }
 
@@ -207,15 +207,15 @@ let placeNumber = function(grid, number, total_tries, retries = 0) {
         amount_placed++;
     }
 
-    console.log('amount of tries: '+tries);
-    console.log('numbers placed: '+amount_placed);
+    // console.log('amount of tries: '+tries);
+    // console.log('numbers placed: '+amount_placed);
 
     let result;
     if (amount_placed < 9) {
-        console.log('Not enough numbers placed');
+        // console.log('Not enough numbers placed');
         grid = eraseNumber(number, grid);
 
-        if( retries < 200 ) {
+        if( retries < 30 ) {
             result = placeNumber(grid, number, total_tries, retries + 1);
         } else {
             result = placeNumber(grid, number - 1, total_tries, 0);
@@ -227,11 +227,11 @@ let placeNumber = function(grid, number, total_tries, retries = 0) {
         return {
             grid: grid,
             tries: total_tries,
-            placed_number: number
+            placed_number: result.placed_number
         };
     }
 
-    console.log('total tries: '+total_tries);
+    // console.log('total tries: '+total_tries);
 
     return {
         grid: grid,
@@ -241,40 +241,94 @@ let placeNumber = function(grid, number, total_tries, retries = 0) {
 };
 
 
-// const numbers = [1, 2, 3, 4, 5, 6, 7, 8 ,9];
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+let generateNewPuzzle = function(numberOfPuzzles) {
+    let successes = 0;
+    let failures = 0;
+    let grid;
 
-let grid = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-];
+    for (let i = 0; i < numberOfPuzzles; i++) {
+        console.log('Generating Puzzle #'+(i+1)+' ...');
 
-let total_tries = 0;
-for( let number = 1; number <= 9; number++) {
-    if( total_tries > 300000000000 ) {
-        throw "Too many tries (parent): "+total_tries;
+        grid = [
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        ];
+
+        try {
+            let total_tries = 0;
+            for( let number = 1; number <= 9; number++) {
+                if( total_tries > 500000000000 ) {
+                    throw "Too many tries (parent): "+total_tries;
+                }
+
+                let result = placeNumber(grid, number, total_tries);
+
+                grid = result.grid;
+                total_tries = result.tries;
+
+                number = result.placed_number;
+            }
+
+            successes++;
+        } catch (e) {
+            failures++;
+        }
     }
 
-    let result = placeNumber(grid, number, total_tries);
+    return {
+        successes: successes,
+        failures: failures,
+        success_rate: ((successes / numberOfPuzzles) * 100) + ' %',
+        last_grid: grid
+    }
+};
 
-    grid = result.grid;
-    total_tries = result.tries;
+// let grid = [
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+// ];
+//
+// let total_tries = 0;
+// for( let number = 1; number <= 9; number++) {
+//     if( total_tries > 500000000000 ) {
+//         throw "Too many tries (parent): "+total_tries;
+//     }
+//
+//     console.log('for loop number: '+number);
+//     let result = placeNumber(grid, number, total_tries);
+//
+//     grid = result.grid;
+//     total_tries = result.tries;
+//
+//     number = result.placed_number;
+//     console.log('for loop number 2: '+number);
+// }
 
-    number = result.placed_number;
-}
 
+// console.log('------------------------------------------------------')
+// console.log('DONE, total tries: '+total_tries);
+//
+// console.log(grid);
 
-console.log('------------------------------------------------------')
-console.log('DONE, total tries: '+total_tries);
+result = generateNewPuzzle(1);
 
-grid.forEach(function(row, row_index) {
+console.log(result);
+
+result.last_grid.forEach(function(row, row_index) {
     row.forEach(function(number, column_index) {
         let cell = document.querySelector('[data-row="'+row_index+'"] [data-col="'+column_index+'"]');
 

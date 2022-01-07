@@ -303,41 +303,8 @@ let generateNewPuzzle = function(numberOfPuzzles) {
     }
 };
 
-// let grid = [
-//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-// ];
-//
-// let total_tries = 0;
-// for( let number = 1; number <= 9; number++) {
-//     if( total_tries > 500000000000 ) {
-//         throw "Too many tries (parent): "+total_tries;
-//     }
-//
-//     console.log('for loop number: '+number);
-//     let result = placeNumber(grid, number, total_tries);
-//
-//     grid = result.grid;
-//     total_tries = result.tries;
-//
-//     number = result.placed_number;
-//     console.log('for loop number 2: '+number);
-// }
 
-
-// console.log('------------------------------------------------------')
-// console.log('DONE, total tries: '+total_tries);
-//
-// console.log(grid);
-
-result = generateNewPuzzle(2000);
+result = generateNewPuzzle(1);
 
 console.log(result);
 
